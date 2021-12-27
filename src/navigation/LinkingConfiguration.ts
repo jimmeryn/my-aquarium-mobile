@@ -1,28 +1,28 @@
-import { LinkingOptions } from "@react-navigation/native";
-import { createURL } from "expo-linking";
+import { LinkingOptions } from '@react-navigation/native';
+import { createURL } from 'expo-linking';
 
-import { RootStackParamList, Route } from "../types";
+import { RootStackParamList, Route } from '../types';
 
 const LinkingConfiguration: LinkingOptions<RootStackParamList> = {
-  prefixes: [createURL("/")],
+  prefixes: [createURL('/')],
   config: {
     screens: {
       Root: {
         screens: {
           [Route.Home]: {
             screens: {
-              TabOneScreen: "home",
+              TabOneScreen: 'home',
             },
           },
           [Route.Aquarium]: {
             screens: {
-              TabTwoScreen: "aquarium",
+              TabTwoScreen: 'aquarium',
             },
           },
         },
       },
-      Modal: "modal",
-      NotFound: "*",
+      Modal: 'modal',
+      NotFound: '*',
     },
   },
 };

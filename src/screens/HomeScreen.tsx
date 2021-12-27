@@ -1,6 +1,6 @@
-import * as React from "react";
-import { View, Text, Button } from "react-native";
-import { RootTabScreenProps, Route } from "../types";
+import * as React from 'react';
+import { View, Text, Button } from 'react-native';
+import { RootTabScreenProps, Route } from '../types';
 
 export const HomeScreen = ({ navigation }: RootTabScreenProps<Route.Home>) => {
   const handleOnPress = () => {

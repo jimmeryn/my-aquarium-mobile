@@ -1,13 +1,13 @@
-import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { ModalScreen } from "../screens/ModalScreen";
-import { NotFoundScreen } from "../screens/NotFoundScreen";
-import { HomeScreen } from "../screens/HomeScreen";
-import { AquariumScreen } from "../screens/AquariumScreen";
-import { RootStackParamList, RootTabParamList, Route } from "../types";
-import { LinkingConfiguration } from "./LinkingConfiguration";
+import { ModalScreen } from '../screens/ModalScreen';
+import { NotFoundScreen } from '../screens/NotFoundScreen';
+import { HomeScreen } from '../screens/HomeScreen';
+import { AquariumScreen } from '../screens/AquariumScreen';
+import { RootStackParamList, RootTabParamList, Route } from '../types';
+import { LinkingConfiguration } from './LinkingConfiguration';
 
 const Navigation = () => (
   <NavigationContainer linking={LinkingConfiguration}>
@@ -25,7 +25,7 @@ const RootNavigator = () => (
       options={{ headerShown: false }}
     />
     <Stack.Screen name={Route.NotFound} component={NotFoundScreen} />
-    <Stack.Group screenOptions={{ presentation: "modal" }}>
+    <Stack.Group screenOptions={{ presentation: 'modal' }}>
       <Stack.Screen name={Route.Modal} component={ModalScreen} />
     </Stack.Group>
   </Stack.Navigator>
