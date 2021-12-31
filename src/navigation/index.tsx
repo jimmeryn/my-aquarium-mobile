@@ -6,7 +6,7 @@ import { ModalScreen } from '../screens/ModalScreen';
 import { NotFoundScreen } from '../screens/NotFoundScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { AquariumScreen } from '../screens/AquariumScreen';
-import { RootStackParamList, RootTabParamList, Route } from '../types';
+import { RootStackParamList, RootTabParamList, Route } from '../types/types';
 import { LinkingConfiguration } from './LinkingConfiguration';
 
 const Navigation = () => (
