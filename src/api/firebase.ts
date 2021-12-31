@@ -31,7 +31,7 @@ const auth = getAuth();
 
 // TODO: Remove for production use
 connectFirestoreEmulator(firestore, 'localhost', 8080);
-// connectAuthEmulator(auth, 'localhost', 8080);
+connectAuthEmulator(auth, 'http://localhost:9099/');
 
 async function getParams(database: Firestore) {
   const paramCol = collection(database, 'params');
