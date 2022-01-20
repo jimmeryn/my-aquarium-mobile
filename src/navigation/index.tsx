@@ -6,8 +6,10 @@ import { ModalScreen } from '../screens/ModalScreen';
 import { NotFoundScreen } from '../screens/NotFoundScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { AquariumScreen } from '../screens/AquariumScreen';
-import { RootStackParamList, RootTabParamList, Route } from '../types/types';
+import { RootStackParamList, RootTabParamList, Route } from '../types/route';
 import { LinkingConfiguration } from './LinkingConfiguration';
+import { NavBar } from '../components/NavBar';
+import { Colors } from '../styles/Colors';
 
 const Navigation = () => (
   <NavigationContainer linking={LinkingConfiguration}>
@@ -36,10 +38,16 @@ const Tab = createNativeStackNavigator<RootTabParamList>();
 const MainTabsNavigator = () => (
   <Tab.Navigator
     initialRouteName={Route.Home}
-    screenOptions={{ headerShown: false }}
+    screenOptions={{
+      headerShown: true,
+      headerStyle: {
+        backgroundColor: Colors.header,
+      },
+      headerTintColor: Colors.text_negative,
+    }}
   >
-    <Tab.Screen name={Route.Home} component={HomeScreen} />
-    <Tab.Screen name={Route.Aquarium} component={AquariumScreen} />
+    <Tab.Screen name={Route.Home} options={{ headerTitle: (props) => <NavBar {...props} /> }} component={HomeScreen} />
+    <Tab.Screen name={Route.Aquarium} options={{ headerTitle: (props) => <NavBar {...props} /> }} component={AquariumScreen} />
   </Tab.Navigator>
 );
 
