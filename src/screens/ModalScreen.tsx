@@ -10,8 +10,8 @@ import { RootStackScreenProps, Route } from '../types/route';
 export const ModalScreen = ({
   navigation,
 }: RootStackScreenProps<Route.Modal>) => {
-  const [name, setName] = React.useState('asd');
-  const [value, setValue] = React.useState('10');
+  const [name, setName] = React.useState('');
+  const [value, setValue] = React.useState('0');
   const [date, setDate] = React.useState(new Date().toLocaleDateString());
   const [viewKey, setViewKey] = React.useState(0);
 
