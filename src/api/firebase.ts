@@ -9,13 +9,10 @@ import {
 import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
-  collection,
-  getDocs,
   Firestore,
   connectFirestoreEmulator,
 } from 'firebase/firestore';
 import { Auth, connectAuthEmulator, getAuth } from 'firebase/auth';
-import { Param } from '../types/data';
 
 const firebaseConfig = {
   apiKey: REACT_APP_API_KEY,
@@ -29,10 +26,9 @@ const firebaseConfig = {
 type FirebaseObject = {
   auth?: Auth;
   firestore?: Firestore;
-  getParams?: (database: Firestore) => Promise<Param[]>;
-}
+};
 
-const firebaseObject: FirebaseObject = {};
+export const firebaseObject: FirebaseObject = {};
 
 try {
   const app = initializeApp(firebaseConfig);
@@ -44,20 +40,8 @@ try {
     connectAuthEmulator(auth, 'http://localhost:9099/');
   }
 
-  async function getParams(database: Firestore) {
-    const paramCol = collection(database, 'params');
-    const paramSnapshot = await getDocs(paramCol);
-    const paramList = paramSnapshot.docs.map((doc) => doc.data() as Param);
-
-    return paramList;
-  }
   firebaseObject.firestore = firestore;
-  firebaseObject.getParams = getParams;
-  firebaseObject.auth = auth;  
+  firebaseObject.auth = auth;
 } catch (error) {
   console.error(error);
-
 }
-
-const { auth, getParams, firestore } = firebaseObject;
-export { auth, getParams, firestore };

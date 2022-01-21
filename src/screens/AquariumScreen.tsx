@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { View, Text, Button } from 'react-native';
-import { firestore, getParams } from '../api/firebase';
+import { getParams } from '../api';
 import { Param } from '../types/data';
 import { styles } from '../styles/StyleScheet';
 import { RootTabScreenProps, Route } from '../types/route';
+import { DataGridComponent } from '../components/DataGridComponent';
+import { getColumns, paramsMapper } from '../utils/gridUtils';
+import { Layout } from '../styles/Layout';
 
 export const AquariumScreen = ({
   navigation,
@@ -18,25 +21,41 @@ export const AquariumScreen = ({
   };
 
   const getAquariumParams = React.useCallback(async () => {
-    const paramsFromDb = await getParams!(firestore!);
+    const paramsFromDb = await getParams!();
     setParams(paramsFromDb);
-  }, [firestore, getParams]);
+  }, [getParams]);
 
   React.useEffect(() => {
     getAquariumParams();
   }, []);
 
   return (
-    <View style={styles.page}>
-      <View>
-        <Text>Aquarium</Text>
-        <Button title="Go to Home" onPress={handleOnPress} />
-        <Button title="Open modal" onPress={handleOpenModal} />
+    <View
+      style={[
+        styles.page,
+        {
+          justifyContent: 'flex-start',
+        },
+      ]}
+      onLayout={Layout.getNewDimensions}
+    >
+      <View style={{ width: '100%' }}>
+        <Text style={styles.title}>Aquarium Data</Text>
       </View>
-      <View>
-        {params.map((param, i) => (
-          <Text key={i}>date: {param.date.toDate().toLocaleDateString()}</Text>
-        ))}
+      <View style={{ width: '100%', flexGrow: 1, paddingBottom: 10 }}>
+        <DataGridComponent rows={paramsMapper(params)} columns={getColumns()} />
+      </View>
+      <View
+        style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          paddingBottom: 10,
+        }}
+      >
+        <Button title="Go to Home" onPress={handleOnPress} />
+        <Button title="Add param" onPress={handleOpenModal} />
       </View>
     </View>
   );
