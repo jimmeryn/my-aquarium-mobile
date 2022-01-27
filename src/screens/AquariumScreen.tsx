@@ -7,6 +7,7 @@ import { RootTabScreenProps, Route } from '../types/route';
 import { DataGridComponent } from '../components/DataGridComponent';
 import { getColumns, paramsMapper } from '../utils/gridUtils';
 import { Layout } from '../styles/Layout';
+import { useFocusEffect } from '@react-navigation/native';
 
 export const AquariumScreen = ({
   navigation,
@@ -20,14 +21,27 @@ export const AquariumScreen = ({
     navigation.navigate(Route.Modal);
   };
 
-  const getAquariumParams = React.useCallback(async () => {
-    const paramsFromDb = await getParams!();
-    setParams(paramsFromDb);
-  }, [getParams]);
+  useFocusEffect(
+    React.useCallback(() => {
+      let isActive = true;
+      const getAquariumParams = async () => {
+        try {
+          const paramsFromDb = await getParams!();
+          if (isActive) {
+            setParams(paramsFromDb);
+          }
+        } catch (e) {
+          console.log(e);
+        }
+      };
 
-  React.useEffect(() => {
-    getAquariumParams();
-  }, []);
+      getAquariumParams();
+
+      return () => {
+        isActive = false;
+      };
+    }, [])
+  );
 
   return (
     <View
